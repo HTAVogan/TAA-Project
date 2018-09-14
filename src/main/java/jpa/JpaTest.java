@@ -3,6 +3,7 @@ package jpa;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceContext;
+import jpa.Entites.*;
 
 public class JpaTest {
 
@@ -17,6 +18,8 @@ public class JpaTest {
 
 
 		try {
+			User firstUser = new User("test1");
+			manager.persist(firstUser);
 
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -2,37 +2,32 @@ package jpa.Entites;
 
 import javax.persistence.Id;
 
-public class Departement extends Location{
-	public Departement() {
-		
-	}
+public class Location {
+	protected long id;
+	protected String name;
 	
-	public Departement(long id, String name)
-	{
-		super(id, name);
-	}
-	/*
-	
-	private long id;
 	@Id
 	public long getId() {
 		return id;
 	}
+	
 	public void setId(long id) {
 		this.id = id;
 	}
+	
 	public String getName() {
 		return name;
 	}
+	
 	public void setName(String name) {
 		this.name = name;
 	}
-	private String name;
-	public Departement(){
-		
+	
+	public Location() {		
 	}
-	public Departement(long id,String name) {
+	
+	public Location(long id,String name) {
 		this.id=id;
 		this.name=name;
-	}*/
+	}
 }

@@ -7,7 +7,16 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
-public class Region {
+public class Region extends Location{
+	public Region() {
+		
+	}
+	
+	public Region(long id, String name)
+	{
+		super(id, name);
+	}
+	/*
 	private long id;
 	private String name;
 	private List<Departement> departements;
@@ -30,5 +39,5 @@ public class Region {
 	}
 	public void setName(String name) {
 		this.name = name;
-	}
+	}*/
 }

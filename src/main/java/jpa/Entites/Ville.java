@@ -5,9 +5,19 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 
 @Entity
-public class Ville {
+public class Ville extends Location{
+	
+	public Ville() {
+		
+	}
+	
+	public Ville(long id, String name)
+	{
+		super(id, name);
+	}
+	/*
 	private long codepostale;
-	@EmbeddedId
+	@Id
 	public long getCodepostale() {
 		return codepostale;
 	}
@@ -28,4 +38,4 @@ public class Ville {
 		this.name=name;
 		codepostale=id;
 	}
-}
+*/}
