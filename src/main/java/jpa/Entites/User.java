@@ -2,6 +2,7 @@ package jpa.Entites;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
 import java.util.ArrayList;
@@ -46,6 +47,7 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	@ManyToMany
 	public List<StyleMusic> getFavoriteStyles() {
 		return FavoriteStyles;
 	}

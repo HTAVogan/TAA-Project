@@ -6,6 +6,8 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 
 import com.mysql.jdbc.Blob;
 
@@ -18,8 +20,9 @@ public class Events {
 	//private Departement departement;
 	//private Ville ville;
 	private String title;
-	private Blob img;
+	private byte[] img;
 	private User creator;
+	@OneToOne
 	public User getCreator() {
 		return creator;
 	}
@@ -47,10 +50,10 @@ public class Events {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public Blob getImg() {
+	public byte[] getImg() {
 		return img;
 	}
-	public void setImg(Blob img) {
+	public void setImg(byte[] img) {
 		this.img = img;
 	}
 	public Events(Date start, Date end) {
@@ -80,6 +83,7 @@ public class Events {
 	public Events() {
 		
 	}
+	@ManyToMany
 	public List<Location> getLocations() {
 		return locations;
 	}

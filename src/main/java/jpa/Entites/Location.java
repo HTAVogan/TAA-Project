@@ -1,7 +1,11 @@
 package jpa.Entites;
 
+import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
 
+@Entity
+@Inheritance
 public class Location {
 	protected long id;
 	protected String name;
