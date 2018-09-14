@@ -1,6 +1,8 @@
 package jpa;
 
 
+import java.sql.Date;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceContext;
@@ -18,9 +20,7 @@ public class JpaTest {
 		query.setParameter("name", username);
 		return !query.getResultList().isEmpty();
 	}
-	/**
-	 * @param args
-	 */
+
 	public static void main(String[] args) {
 
 		manager = EntityManagerHelper.getEntityManager();
@@ -50,6 +50,26 @@ public class JpaTest {
 		EntityManagerHelper.closeEntityManagerFactory();
 		//		factory.close();
 	}
-
-
+	public static void addstylemusic(String style) {
+		StyleMusic stylem = new StyleMusic (style);
+		manager.persist(stylem);
+	}
+	public static void addtofav (User u,StyleMusic sm ) {
+		u.getFavoriteStyles().add(sm);
+	}
+	public static void createEvent(String name,Location l,User u,Date start, Date end) {
+		Events e = new Events(name,u,start,end,l);
+		if(eventAlreadyExist(name)) {
+			//throw error
+		}
+		else {
+			manager.persist(e);	
+		}
+	}
+	public static boolean eventAlreadyExist(String s) {
+		String querystring = "SELECT e FROM Events e WHERE e.title = :name";
+		Query query = manager.createQuery(querystring);
+		query.setParameter("name", s);
+		return !query.getResultList().isEmpty();
+	}
 }
