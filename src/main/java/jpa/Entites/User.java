@@ -30,18 +30,7 @@ public class User {
 	public void setUsername(String username) {
 		this.username = username;
 	}
-	public User() {
-		
-	}
-	public User(String username) {
-		this.username=username;
-		this.FavoriteStyles=new ArrayList<StyleMusic>();
-	}
-	public User(String username,String password,List<StyleMusic> lm) {
-		this.username=username;
-		this.FavoriteStyles=lm;
-		this.password=password;
-	}
+	
 	//@Column(nullable=false)
 	public String getPassword() {
 		return password;
@@ -55,5 +44,23 @@ public class User {
 	}
 	public void setFavoriteStyles(List<StyleMusic> favoriteStyles) {
 		FavoriteStyles = favoriteStyles;
+	}
+	
+public User() {
+		
+	}
+	public User(String username) {
+		this.username = username;
+		this.FavoriteStyles = new ArrayList<StyleMusic>();
+	}
+	public User(String username,String password,List<StyleMusic> lm) {
+		this.username = username;
+		this.FavoriteStyles = lm;
+		this.password = password;
+	}
+	public User(String username, String password) {
+		this.username = username;
+		this.FavoriteStyles = new ArrayList<StyleMusic>();
+		this.password = password;
 	}
 }
