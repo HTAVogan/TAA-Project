@@ -22,7 +22,10 @@ public class JpaTest {
 			manager.persist(firstUser);*/
 		
 			User firstUser = manager.find(User.class, (long)1);
-			System.out.println(firstUser.getUsername());
+			//System.out.println(firstUser.getUsername());
+			Events firstEvent = new Events();
+			firstEvent.setCreator(firstUser);
+			manager.persist(firstEvent);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
