@@ -18,9 +18,11 @@ public class JpaTest {
 
 
 		try {
-			User firstUser = new User("test1");
-			manager.persist(firstUser);
-
+			/*User firstUser = new User("test");
+			manager.persist(firstUser);*/
+		
+			User firstUser = manager.find(User.class, (long)1);
+			System.out.println(firstUser.getUsername());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
