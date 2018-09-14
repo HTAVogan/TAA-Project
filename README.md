@@ -1,1 +1,1 @@
-# Template de projet pour le TP TAA en M2 IL/ILA 2018 UniR
+Application de gestion d'evenements musicaux 
