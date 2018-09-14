@@ -6,17 +6,17 @@ import javax.persistence.Id;
 
 @Entity
 public class StyleMusic {
-	private long id;
-	@Id
-	@GeneratedValue
-	public long getId() {
-		return id;
-	}
-	public void setId(long id) {
-		this.id = id;
-	}
+	private long styleMusic_id;
 	public String getStyle() {
 		return style;
+	}
+	@Id
+	@GeneratedValue
+	public long getStyleMusic_id() {
+		return styleMusic_id;
+	}
+	public void setStyleMusic_id(long styleMusic_id) {
+		this.styleMusic_id = styleMusic_id;
 	}
 	public void setStyle(String style) {
 		this.style = style;

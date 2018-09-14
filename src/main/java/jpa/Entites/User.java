@@ -3,8 +3,11 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,18 +15,19 @@ import java.util.List;
 @Entity
 public class User {
 	
-	private long id;
+	private long user_id;
 	private String username;
 	private String password;
 	private List<StyleMusic> FavoriteStyles ;
 	@Id
 	@GeneratedValue
-	public long getId() {
-		return id;
+	public long getUser_id() {
+		return user_id;
 	}
-	public void setId(long id) {
-		this.id = id;
+	public void setUser_id(long user_id) {
+		this.user_id = user_id;
 	}
+	
 	public String getUsername() {
 		return username;
 	}
@@ -38,7 +42,11 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	@ManyToMany
+	@OneToMany(mappedBy = "styleMusic_id")
+	/*@JoinTable(name="User_StyleMusic",
+		joinColumns = {@JoinColumn ( name =  "user_id")},
+		inverseJoinColumns = { @JoinColumn(name = "syleMusic_id") }
+	)*/
 	public List<StyleMusic> getFavoriteStyles() {
 		return FavoriteStyles;
 	}

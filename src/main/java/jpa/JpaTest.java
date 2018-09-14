@@ -26,12 +26,15 @@ public class JpaTest {
 		return !query.getResultList().isEmpty();
 	}
 	
-	public static void CreateUser (String username, String password) {
+	public static User CreateUser (String username, String password) {
 		if(userAlreadyexist(username)) {
 			// Throw user already exist error
+			System.out.println("Erreur name already exist");
+			return null;
 		}else {
 			User newUser = new User(username, password);
 			manager.persist(newUser);
+			return newUser;
 		}
 	}
 	
@@ -74,13 +77,11 @@ public class JpaTest {
 
 
 		try {
-			CreateUser("test25", "");
-		
-			User firstUser2 = manager.find(User.class, (long)1);
-			//System.out.println(firstUser.getUsername());
-			//Events firstEvent = new Events();
-			//firstEvent.setCreator(firstUser);
-			//manager.persist(firstEvent);
+			CreateUser("test25", "blabla");
+			CreateUser("Test26", "bibi");
+			User r = getUserByUsername("Test26");
+			StyleMusic sm =addstylemusic("rnb");
+			addtofav(r, sm);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -91,9 +92,23 @@ public class JpaTest {
 		EntityManagerHelper.closeEntityManagerFactory();
 		//		factory.close();
 	}
-	public static void addstylemusic(String style) {
-		StyleMusic stylem = new StyleMusic (style);
-		manager.persist(stylem);
+	public static StyleMusic addstylemusic(String style) {
+		if(musicalreadyexist(style)) {
+			System.out.println("This style already exist");
+			return null;
+		}
+		else {
+			StyleMusic stylem = new StyleMusic (style);
+			manager.persist(stylem);
+			return stylem;
+		}
+	
+	}
+	public static boolean musicalreadyexist(String style) {
+		String querystring = "SELECT m FROM StyleMusic m WHERE m.style = :name";
+		Query query = manager.createQuery(querystring);
+		query.setParameter("name", style);
+		return !query.getResultList().isEmpty();
 	}
 	public static void addtofav (User u,StyleMusic sm ) {
 		u.getFavoriteStyles().add(sm);
@@ -101,8 +116,7 @@ public class JpaTest {
 	public static void createEvent(String name,Location l,User u,Date start, Date end) {
 		Events e = new Events(name,u,start,end,l);
 		if(eventAlreadyExist(name)) {
-			//throw error
-		}
+			System.out.println("Error name already exist for this event");		}
 		else {
 			manager.persist(e);	
 		}

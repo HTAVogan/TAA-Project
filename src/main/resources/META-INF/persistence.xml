@@ -12,7 +12,7 @@
                   <property name="hibernate.show_sql" value="true"/>
       
          <property name="hibernate.dialect" value="org.hibernate.dialect.HSQLDialect"/>
-            <property name="hibernate.hbm2ddl.auto" value="update"/>
+            <property name="hibernate.hbm2ddl.auto" value="create"/>
          <property name="hibernate.connection.driver_class" value="org.hsqldb.jdbcDriver"/>
          <property name="hibernate.connection.username" value="sa"/>
          <property name="hibernate.connection.password" value=""/>
@@ -25,7 +25,7 @@
      <!--  <class>org.hibernate.ejb.test.Item</class> -->
       <properties>
          <property name="hibernate.dialect" value="org.hibernate.dialect.HSQLDialect"/>
-	      <property name="hibernate.hbm2ddl.auto" value="update"/>
+	      <property name="hibernate.hbm2ddl.auto" value="create"/>
             <property name="hibernate.show_sql" value="true"/>
     	  <property name="toplink.target-database" value="HSQL"/>
          <property name="hibernate.connection.driver_class" value="org.hsqldb.jdbcDriver"/>
@@ -49,7 +49,7 @@
             <property name="hibernate.ejb.cfgfile" value="/hibernate.cfg.xml"/>
             <property name="hibernate.hbm2ddl.auto" value="create"/>
             -->
-            <property name="hibernate.hbm2ddl.auto" value="update"/>
+            <property name="hibernate.hbm2ddl.auto" value="create"/>
             <property name="hibernate.archive.autodetection" value="class, hbm"/>
             <property name="hibernate.show_sql" value="true"/>
             <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>
