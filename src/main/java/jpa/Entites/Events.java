@@ -17,7 +17,13 @@ public class Events {
 	private Ville ville;
 	private String title;
 	private Blob img;
-	
+	private User creator;
+	public User getCreator() {
+		return creator;
+	}
+	public void setCreator(User creator) {
+		this.creator = creator;
+	}
 	public Departement getDepartement() {
 		return departement;
 	}
