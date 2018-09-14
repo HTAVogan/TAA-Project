@@ -1,6 +1,7 @@
 package jpa.Entites;
 
 import java.sql.Date;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,8 +14,9 @@ public class Events {
 	private long id;
 	private Date date_start;
 	private Date date_end;
-	private Departement departement;
-	private Ville ville;
+	private List<Location> locations;
+	//private Departement departement;
+	//private Ville ville;
 	private String title;
 	private Blob img;
 	private User creator;
@@ -24,6 +26,7 @@ public class Events {
 	public void setCreator(User creator) {
 		this.creator = creator;
 	}
+	/*
 	public Departement getDepartement() {
 		return departement;
 	}
@@ -36,6 +39,8 @@ public class Events {
 	public void setVille(Ville ville) {
 		this.ville = ville;
 	}
+	*/
+	
 	public String getTitle() {
 		return title;
 	}
@@ -74,5 +79,11 @@ public class Events {
 	}
 	public Events() {
 		
+	}
+	public List<Location> getLocations() {
+		return locations;
+	}
+	public void setLocations(List<Location> locations) {
+		this.locations = locations;
 	}
 }
