@@ -1,4 +1,5 @@
 package jpa.Entites;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -41,6 +42,7 @@ public class User {
 		this.FavoriteStyles=lm;
 		this.password=password;
 	}
+	//@Column(nullable=false)
 	public String getPassword() {
 		return password;
 	}
