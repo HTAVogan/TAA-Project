@@ -12,6 +12,7 @@ public class User {
 	
 	private long id;
 	private String username;
+	private String password;
 	private List<StyleMusic> FavoriteStyles ;
 	@Id
 	@GeneratedValue
@@ -34,9 +35,10 @@ public class User {
 		this.username=username;
 		this.FavoriteStyles=new ArrayList<StyleMusic>();
 	}
-	public User(String username,List<StyleMusic> lm) {
+	public User(String username,String password,List<StyleMusic> lm) {
 		this.username=username;
 		this.FavoriteStyles=lm;
+		this.password=password;
 	}
 	public List<StyleMusic> getFavoriteStyles() {
 		return FavoriteStyles;
