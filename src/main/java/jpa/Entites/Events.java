@@ -21,6 +21,14 @@ public class Events {
 	//private Ville ville;
 	private String title;
 	private byte[] img;
+	private String url;
+	
+	public String getUrl() {
+		return url;
+	}
+	public void setUrl(String url) {
+		this.url = url;
+	}
 	private User creator;
 	@OneToOne
 	public User getCreator() {
@@ -56,11 +64,12 @@ public class Events {
 	public void setImg(byte[] img) {
 		this.img = img;
 	}
-	public Events(String name, User u, Date start,Date end,Location l) {
-		this.title=name;
-		this.creator=u;
-		this.date_start=start;
-		this.date_end=end;
+	public Events(String name, User u, Date start,Date end,Location l, String url) {
+		this.title = name;
+		this.creator = u;
+		this.url = url;
+		this.date_start = start;
+		this.date_end = end;
 		this.locations.add(l);
 	}
 	public Events(Date start, Date end) {

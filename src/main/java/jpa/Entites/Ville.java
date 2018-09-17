@@ -13,7 +13,7 @@ public class Ville extends Location{
 	
 	public Ville(long id, String name)
 	{
-		super(id, name);
+		super(name);
 	}
 	/*
 	private long codepostale;

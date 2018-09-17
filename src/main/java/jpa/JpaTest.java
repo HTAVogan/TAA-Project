@@ -67,7 +67,7 @@ public class JpaTest {
 		return foundEvents;
 	}
 	
-	/**
+	/**name
 	 * @param args
 	 */
 	public static void main(String[] args) {
@@ -79,6 +79,10 @@ public class JpaTest {
 			User r = getUserByUsername("Test26");
 			StyleMusic sm = addstylemusic("rnb");
 			addtofav(r, sm);
+			String newEventUrl = "https://www.facebook.com/search/top/?q=we%20are%20rave%20-%20jacidorex%2C%20subway%20shamans%2C%20acid%20division%2C%20nz42";
+			Date start = new Date(118,  8,  21);
+			Date end = new Date(119, 8, 22);//Date) new java.util.Date(118, 8, 21, 23, 0);
+			createEvent("We are Rave", CreateLocation("Nantes", 2), r, newEventUrl, start , end);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -99,6 +103,36 @@ public class JpaTest {
 		}
 	
 	}
+	public static boolean locationAlreadyExist(String name) {
+		String querystring = "SELECT l FROM Location WHERE l.name = :name";
+		Query query = manager.createQuery(querystring);
+		query.setParameter("name", name);
+		return !query.getResultList().isEmpty();
+	}
+	
+	public static Location CreateLocation(String name, int type) {
+		if(locationAlreadyExist(name)) {
+			// throw Location already exist error
+			System.err.println("A location named '" + name + "' already exists");
+			return null;
+		}else {
+			Location ret;
+			switch(type) {
+			case 0:
+				ret = new Region(name);
+				break;
+			case 1:
+				ret = new Departement(name);
+				break;
+			case 2:
+				ret = new Ville(name);
+				break;
+			}
+			manager.persist(ret);
+			return ret;
+		}
+	}
+	
 	public static boolean musicalreadyexist(String style) {
 		String querystring = "SELECT m FROM StyleMusic m WHERE m.style = :name";
 		Query query = manager.createQuery(querystring);
@@ -108,11 +142,11 @@ public class JpaTest {
 	public static void addtofav (User u,StyleMusic sm ) {
 		u.getFavoriteStyles().add(sm);
 	}
-	public static void createEvent(String name,Location l,User u,Date start, Date end) {
-		Events e = new Events(name,u,start,end,l);
+	public static void createEvent(String name,Location l,User u, String url, Date start, Date end) {
 		if(eventAlreadyExist(name)) {
 			System.out.println("Error title '" + name + "' already exist for this event");		}
 		else {
+			Events e = new Events(name,u,start,end,l, url);
 			manager.persist(e);	
 		}
 	}
