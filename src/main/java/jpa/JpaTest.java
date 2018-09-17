@@ -72,10 +72,7 @@ public class JpaTest {
 	 */
 	public static void main(String[] args) {
 
-		manager = EntityManagerHelper.getEntityManager();
-		tx = manager.getTransaction();
-		tx.begin();
-
+		DAO dao = new DAO (EntityManagerHelper.getEntityManager(),manager.getTransaction());
 		try {
 			CreateUser("test25", "blabla");
 			CreateUser("5555555", "bibi");
