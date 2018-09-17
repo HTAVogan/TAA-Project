@@ -76,8 +76,8 @@ public class DAO {
 	public  void addtofav (User u,StyleMusic sm ) {
 		u.getFavoriteStyles().add(sm);
 	}
-	public  void createEvent(String name,Location l,User u,Date start, Date end) {
-		Events e = new Events(name,u,start,end,l);
+	public  void createEvent(String name,Location l,User u, String url, Date start, Date end) {
+		Events e = new Events(name,u,start,end,l,url);
 		if(eventAlreadyExist(name)) {
 			System.out.println("Error title '" + name + "' already exist for this event");		}
 		else {
