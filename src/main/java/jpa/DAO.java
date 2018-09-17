@@ -30,7 +30,7 @@ public class DAO {
 		return !query.getResultList().isEmpty();
 	}
 	
-	public Events[] getEventByUser(User user){
+	public Events[] getEventsByUser(User user){
 			String querystring = "SELECT e FROM Events e WHERE e.CREATOR_USER_ID = :id";
 			Query query = manager.createNativeQuery(querystring, Events.class);
 			query.setParameter("id", user.getUser_id());
@@ -39,6 +39,29 @@ public class DAO {
 				foundEvents[i] = (Events)query.getResultList().get(i);
 			}
 			return foundEvents;
+	}
+	
+	public Events[] getEventsByID(long id) {
+		String querystring = "SELECT e FROM Events e WHERE e.CREATOR_USER_ID = :id";
+		Query query = manager.createNativeQuery(querystring, Events.class);
+		query.setParameter("id", id);
+		Events[] foundEvents = new Events[query.getResultList().size()];
+		for(int i = 0; i < query.getResultList().size(); i++) {
+			foundEvents[i] = (Events)query.getResultList().get(i);
+		}
+		return foundEvents;
+	}
+
+	public Events[] getEventsByUsername(String username) {
+		String querystring = "SELECT e FROM Events e WHERE e.CREATOR_USER_ID = :id";
+		Query query = manager.createNativeQuery(querystring, Events.class);
+		User user = getUserByUsername(username);
+		query.setParameter("id", user.getUser_id());
+		Events[] foundEvents = new Events[query.getResultList().size()];
+		for(int i = 0; i < query.getResultList().size(); i++) {
+			foundEvents[i] = (Events)query.getResultList().get(i);
+		}
+		return foundEvents;
 	}
 	
 	public User CreateUser (String username, String password) {
