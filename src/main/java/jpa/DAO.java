@@ -64,7 +64,7 @@ public class DAO {
 		return foundEvents;
 	}
 	
-	public User CreateUser (String username, String password) {
+	public User CreateUser(String username, String password) {
 		if(userAlreadyexist(username)) {
 			// Throw user already exist error
 			System.out.println("Error,'"+username+"' already exist");
