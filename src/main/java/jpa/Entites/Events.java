@@ -1,6 +1,7 @@
 package jpa.Entites;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -70,6 +71,7 @@ public class Events {
 		this.url = url;
 		this.date_start = start;
 		this.date_end = end;
+		this.locations = new ArrayList<Location>();
 		this.locations.add(l);
 	}
 	public Events(Date start, Date end) {

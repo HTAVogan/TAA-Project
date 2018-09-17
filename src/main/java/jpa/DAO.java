@@ -95,6 +95,7 @@ public class DAO {
 		User foundUser = manager.find(User.class, id);
 		return foundUser;
 	}
+	
 	public StyleMusic addstylemusic(String style) {
 		if(musicalreadyexist(style)) {
 			System.out.println("The music style '" + style + "' already exist");
@@ -105,7 +106,6 @@ public class DAO {
 			manager.persist(stylem);
 			return stylem;
 		}
-	
 	}
 	public boolean musicalreadyexist(String style) {
 		String querystring = "SELECT m FROM StyleMusic m WHERE m.style = :name";
@@ -118,12 +118,16 @@ public class DAO {
 		manager.refresh(u);
 	}
 	
-	public void createEvent(String name, Location l, User u, String url, Date start, Date end) {
-		Events e = new Events(name,u,start,end,l,url);
+	public Events createEvent(String name, Location l, User u, String url, Date start, Date end) {
 		if(eventAlreadyExist(name)) {
-			System.out.println("Error title '" + name + "' already exist for this event");		}
+			System.out.println("Error title '" + name + "' already exist for this event");
+			return null;
+		}
 		else {
+			System.out.println(u.getUser_id() + " creates an Event with url '" + url+ "'");
+			Events e = new Events(name,u,start,end,l,url);
 			manager.persist(e);	
+			return e;
 		}
 	}
 	public Events getEventById(long id) {

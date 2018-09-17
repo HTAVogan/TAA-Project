@@ -32,7 +32,8 @@ public class JpaTest {
 			Date start = new Date(118,  8,  21);
 			Date end = new Date(119, 8, 22);//Date) new java.util.Date(118, 8, 21, 23, 0);
 			Location location = dao.CreateLocation("Nantes", 2);
-			dao.createEvent("We are Rave", location, r, newEventUrl, start , end);
+			System.out.println(location.getName());
+			Events WeAreRave = dao.createEvent("We are Rave", location, r, newEventUrl, start , end);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
