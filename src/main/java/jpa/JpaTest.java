@@ -29,7 +29,7 @@ public class JpaTest {
 	public static User CreateUser (String username, String password) {
 		if(userAlreadyexist(username)) {
 			// Throw user already exist error
-			System.out.println("Erreur name already exist");
+			System.out.println("Error,'"+username+"' already exist");
 			return null;
 		}else {
 			User newUser = new User(username, password);
@@ -44,6 +44,7 @@ public class JpaTest {
 		query.setParameter("name", username);
 		if(query.getResultList().isEmpty()) {
 			//throw missing user error
+			System.err.println("No User with username '" + username + "' has been found!");
 			return null;
 		}else {
 			return (User) query.getResultList().get(0);
@@ -80,7 +81,7 @@ public class JpaTest {
 			CreateUser("test25", "blabla");
 			CreateUser("Test26", "bibi");
 			User r = getUserByUsername("Test26");
-			StyleMusic sm =addstylemusic("rnb");
+			StyleMusic sm = addstylemusic("rnb");
 			addtofav(r, sm);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -94,7 +95,7 @@ public class JpaTest {
 	}
 	public static StyleMusic addstylemusic(String style) {
 		if(musicalreadyexist(style)) {
-			System.out.println("This style already exist");
+			System.out.println("The music style '" + style + "' already exist");
 			return null;
 		}
 		else {
@@ -116,7 +117,7 @@ public class JpaTest {
 	public static void createEvent(String name,Location l,User u,Date start, Date end) {
 		Events e = new Events(name,u,start,end,l);
 		if(eventAlreadyExist(name)) {
-			System.out.println("Error name already exist for this event");		}
+			System.out.println("Error title '" + name + "' already exist for this event");		}
 		else {
 			manager.persist(e);	
 		}

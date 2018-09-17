@@ -99,3 +99,5 @@ alter table Events_Location add constraint FK_m9a4d7dvdvej1b46x651o4yxw foreign 
 alter table Events_Location add constraint FK_2rijph8nmjt1rl54s2tumnpe3 foreign key (Events_id) references Events
 alter table StyleMusic add constraint FK_esqi9j6ri8p4lmwmhhvk9vfqw foreign key (styleMusic_id) references User
 DISCONNECT
+/*C3*/SET SCHEMA PUBLIC
+DISCONNECT
