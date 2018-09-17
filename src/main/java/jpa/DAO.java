@@ -51,7 +51,7 @@ public class DAO {
 	
 	public  User getUserByUsername(String username) {
 		String querystring = "SELECT u FROM User u WHERE u.username = :name";
-		Query query = manager.createQuery(querystring);
+		Query query = manager.createNativeQuery(querystring, User.class);
 		query.setParameter("name", username);
 		if(query.getResultList().isEmpty()) {
 			//throw missing user error
