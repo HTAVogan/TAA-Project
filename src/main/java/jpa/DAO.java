@@ -25,7 +25,7 @@ public class DAO {
 	}
 	public boolean userAlreadyexist (String username) {
 		String querystring = "SELECT u FROM User u WHERE u.username = :name";
-		Query query = manager.createQuery(querystring);
+		Query query = manager.createNativeQuery(querystring, User.class);
 		query.setParameter("name", username);
 		return !query.getResultList().isEmpty();
 	}
@@ -80,14 +80,15 @@ public class DAO {
 	}
 	public  boolean musicalreadyexist(String style) {
 		String querystring = "SELECT m FROM StyleMusic m WHERE m.style = :name";
-		Query query = manager.createQuery(querystring);
+		Query query = manager.createNativeQuery(querystring, StyleMusic.class);
 		query.setParameter("name", style);
 		return !query.getResultList().isEmpty();
 	}
 	public  void addtofav (User u,StyleMusic sm ) {
 		u.getFavoriteStyles().add(sm);
 	}
-	public  void createEvent(String name,Location l,User u, String url, Date start, Date end) {
+	
+	public void createEvent(String name,Location l,User u, String url, Date start, Date end) {
 		Events e = new Events(name,u,start,end,l,url);
 		if(eventAlreadyExist(name)) {
 			System.out.println("Error title '" + name + "' already exist for this event");		}
@@ -95,16 +96,30 @@ public class DAO {
 			manager.persist(e);	
 		}
 	}
+	public Events getEventById(long id) {
+		String queryString = "SELECT e FROM Events e WHERE e.id = :id";
+		Query query = manager.createNativeQuery(queryString, Events.class);
+		query.setParameter("id", id);
+		if(query.getResultList().isEmpty()) {
+			//throw Event not found
+			System.err.println("Error : no Events with id " + id);
+			return null;
+		}
+		else {
+			return (Events)query.getResultList().get(0);
+		}
+	}
+	
 	public  boolean eventAlreadyExist(String s) {
 		String querystring = "SELECT e FROM Events e WHERE e.title = :name";
-		Query query = manager.createQuery(querystring);
+		Query query = manager.createNativeQuery(querystring, Events.class);
 		query.setParameter("name", s);
 		return !query.getResultList().isEmpty();
 	}
 
 	public  Events[] lookForEventsByName(String searchString){
 		String querystring = "SELECT e FROM Events e WHERE e.title = :search";
-		Query query = manager.createQuery(querystring);
+		Query query = manager.createNativeQuery(querystring, Events.class);
 		query.setParameter("search", searchString);
 		Events[] foundEvents = new Events[query.getResultList().size()];
 		for(int i = 0; i < query.getResultList().size(); i++) {
@@ -114,7 +129,7 @@ public class DAO {
 	}
 	public  boolean locationAlreadyExist(String name) {
 		String querystring = "SELECT l FROM Location WHERE l.name = :name";
-		Query query = manager.createQuery(querystring);
+		Query query = manager.createNativeQuery(querystring, Location.class);
 		query.setParameter("name", name);
 		return !query.getResultList().isEmpty();
 	}

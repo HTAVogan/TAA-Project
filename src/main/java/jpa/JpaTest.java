@@ -39,10 +39,4 @@ public class JpaTest {
 		EntityManagerHelper.closeEntityManagerFactory();
 		//		factory.close();
 	}
-
-
-	
-
-
-
-	}
+}
