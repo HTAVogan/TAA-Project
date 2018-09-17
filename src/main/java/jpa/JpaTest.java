@@ -76,10 +76,9 @@ public class JpaTest {
 		tx = manager.getTransaction();
 		tx.begin();
 
-
 		try {
 			CreateUser("test25", "blabla");
-			CreateUser("Test26", "bibi");
+			CreateUser("5555555", "bibi");
 			User r = getUserByUsername("Test26");
 			StyleMusic sm = addstylemusic("rnb");
 			addtofav(r, sm);
@@ -87,8 +86,6 @@ public class JpaTest {
 			e.printStackTrace();
 		}
 		tx.commit();
-
-
 		manager.close();
 		EntityManagerHelper.closeEntityManagerFactory();
 		//		factory.close();

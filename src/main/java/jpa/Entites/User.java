@@ -10,6 +10,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 @Entity
@@ -42,12 +43,12 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	@OneToMany(mappedBy = "styleMusic_id")
-	/*@JoinTable(name="User_StyleMusic",
+	@ManyToMany
+	@JoinTable(name="FavoriteStyles",
 		joinColumns = {@JoinColumn ( name =  "user_id")},
 		inverseJoinColumns = { @JoinColumn(name = "syleMusic_id") }
-	)*/
-	public List<StyleMusic> getFavoriteStyles() {
+	)
+	public Collection<StyleMusic> getFavoriteStyles() {
 		return FavoriteStyles;
 	}
 	public void setFavoriteStyles(List<StyleMusic> favoriteStyles) {
