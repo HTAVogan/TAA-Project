@@ -9,7 +9,7 @@ public class Departement extends Location{
 	
 	public Departement(long id, String name)
 	{
-		super(id, name);
+		super(name);
 	}
 	/*
 	

@@ -14,7 +14,7 @@ public class Region extends Location{
 	
 	public Region(long id, String name)
 	{
-		super(id, name);
+		super(name);
 	}
 	/*
 	private long id;

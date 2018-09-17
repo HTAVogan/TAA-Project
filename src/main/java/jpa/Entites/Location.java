@@ -1,6 +1,7 @@
 package jpa.Entites;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 
@@ -11,6 +12,7 @@ public class Location {
 	protected String name;
 	
 	@Id
+	@GeneratedValue
 	public long getId() {
 		return id;
 	}
@@ -30,7 +32,7 @@ public class Location {
 	public Location() {		
 	}
 	
-	public Location(long id,String name) {
+	public Location(String name) {
 		this.id=id;
 		this.name=name;
 	}
