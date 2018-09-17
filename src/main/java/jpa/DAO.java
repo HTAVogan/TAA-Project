@@ -1,6 +1,7 @@
 package jpa;
 
 import java.sql.Date;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
@@ -27,6 +28,13 @@ public class DAO {
 		Query query = manager.createQuery(querystring);
 		query.setParameter("name", username);
 		return !query.getResultList().isEmpty();
+	}
+	
+	public List<Events> getEventByUser(User user){
+			String querystring = "SELECT e FROM Events e WHERE e.CREATOR_USER_ID = :id";
+			Query query = manager.createNativeQuery(querystring, Events.class);
+			query.setParameter("id", user.getUser_id());
+			return query.getResultList();
 	}
 	
 	public User CreateUser (String username, String password) {
