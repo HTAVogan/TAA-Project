@@ -146,7 +146,7 @@ public class JpaTest {
 		if(eventAlreadyExist(name)) {
 			System.out.println("Error title '" + name + "' already exist for this event");		}
 		else {
-			Events e = new Events(name,u,start,end,l, url);
+			Events e = new Events(name,u,start,end,l,url);
 			manager.persist(e);	
 		}
 	}
