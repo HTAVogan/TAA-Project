@@ -119,7 +119,7 @@ public class JpaTest {
 			System.err.println("A location named '" + name + "' already exists");
 			return null;
 		}else {
-			Location ret;
+			Location ret = new Location();
 			switch(type) {
 			case 0:
 				ret = new Region(name);

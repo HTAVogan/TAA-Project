@@ -11,7 +11,7 @@ public class Ville extends Location{
 		
 	}
 	
-	public Ville(long id, String name)
+	public Ville(String name)
 	{
 		super(name);
 	}

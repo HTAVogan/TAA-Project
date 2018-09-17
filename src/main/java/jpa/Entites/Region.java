@@ -12,7 +12,7 @@ public class Region extends Location{
 		
 	}
 	
-	public Region(long id, String name)
+	public Region(String name)
 	{
 		super(name);
 	}
