@@ -72,8 +72,8 @@ public class DAOEvents {
 		}
 	}
 	public Events createEvent(String name, List<Location> ls, User u, String url, Date start, Date end) {
-		this.tx = EntityManagerHelper.getEntityManager().getTransaction();
-		this.tx.begin();
+		EntityTransaction tx = EntityManagerHelper.getEntityManager().getTransaction();
+		tx.begin();
 
 		if(eventAlreadyExist(name)) {
 			System.out.println("Error title '" + name + "' already exist for this event");
@@ -83,13 +83,13 @@ public class DAOEvents {
 			System.out.println(u.getUser_id() + " creates an Event with url '" + url+ "'");
 			Events e = new Events(name,u,start,end,ls,url);
 			manager.persist(e);	
-			this.tx.commit();
+			tx.commit();
 			return e;
 		}
 	}
 	public Events createEvent(String name, String url) {
-		this.tx = EntityManagerHelper.getEntityManager().getTransaction();
-		this.tx.begin();
+		EntityTransaction  tx = EntityManagerHelper.getEntityManager().getTransaction();
+		tx.begin();
 
 		if(eventAlreadyExist(name)) {
 			System.out.println("Error title '" + name + "' already exist for this event");
@@ -99,7 +99,7 @@ public class DAOEvents {
 			System.out.println("creation of simple Event with url '" + url+ "'");
 			Events e = new Events(name,url);
 			manager.persist(e);	
-			this.tx.commit();
+			tx.commit();
 			return e;
 		}
 	}

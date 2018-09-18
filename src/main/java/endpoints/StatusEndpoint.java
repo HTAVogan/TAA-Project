@@ -90,9 +90,13 @@ public class StatusEndpoint {
     
     @GET
     @Path("/events/{id}")
-    @Consumes(MediaType.APPLICATION_JSON)
-    public Events getEventById(@PathParam("id")String  id) {
-    	return eventsDao.getEventById(Long.parseLong(id));
+    //@Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.TEXT_PLAIN)
+    public String getEventById(@PathParam("id")String  id) {
+    	Events e = eventsDao.getEventById(Long.parseLong(id));
+    	String ret = "Events received : id : " + e.getId() + " | title : " + e.getTitle() + " | url : " + e.getUrl();
+    	return ret;
+    	
     	/*
     	String querystring = "SELECT e FROM Events e WHERE e.ID = :id";
 		Query query = manager.createQuery(querystring);
@@ -110,7 +114,7 @@ public class StatusEndpoint {
     
     @GET
     @Path("/events/{title}/{url}")
-    @Consumes(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.TEXT_PLAIN)
     public Events createSimpleEvent(@PathParam("title") String title, @PathParam("url") String url) {
     	System.out.println("Crezation of simple Events before");
     	return eventsDao.createEvent(title, url);
