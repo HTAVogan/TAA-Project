@@ -56,7 +56,7 @@ public class DAOEvents {
 
 	public Events createEvent(String name, Location l, User u, String url, Date start, Date end) {
 
-		EntityTransaction  tx = EntityManagerHelper.getEntityManager().getTransaction();
+		EntityTransaction  tx = manager.getTransaction();
 		tx.begin();
 
 		if(eventAlreadyExist(name)) {
@@ -72,7 +72,7 @@ public class DAOEvents {
 		}
 	}
 	public Events createEvent(String name, List<Location> ls, User u, String url, Date start, Date end) {
-		EntityTransaction tx = EntityManagerHelper.getEntityManager().getTransaction();
+		EntityTransaction  tx = EntityManagerHelper.getEntityManager().getTransaction();
 		tx.begin();
 
 		if(eventAlreadyExist(name)) {

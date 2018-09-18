@@ -16,6 +16,7 @@
  */
 package endpoints;
 
+import java.sql.Date;
 import java.util.logging.Logger;
 
 import javax.persistence.EntityManager;
@@ -86,6 +87,24 @@ public class StatusEndpoint {
     @Consumes(MediaType.APPLICATION_JSON)
     public void createEvents(Events e) {
     	eventsDao.createEvent(e.getTitle(), e.getLocations(), e.getCreator(), e.getUrl(), e.getDate_start(), e.getDate_end());
+    }
+    
+    @GET
+    @Path("/events/create/{title}/{location}/{creator}/{url}/{start}/{end}")
+    public void createEventsTest(@PathParam("title")String title, @PathParam("location")String location,@PathParam("creator") String creator,@PathParam("url")String url,@PathParam("start")String start,@PathParam("end")String end) {
+    	Location loc = new Location(location);
+    	User user = new User(creator);
+    	String[] res = start.split(":");
+    	int year = Integer.parseInt(res[2]);
+    	int month = Integer.parseInt(res[1]);
+    	int day = Integer.parseInt(res[0]);
+     	String[] res2 = end.split(":");
+    	int year2 = Integer.parseInt(res2[2]);
+    	int month2 = Integer.parseInt(res2[1]);
+    	int day2 = Integer.parseInt(res2[0]);
+    	Date staart = new Date(year,month,day);
+    	Date eend = new Date (year2,month2,day2);
+    	eventsDao.createEvent(title, loc, user, url,staart, eend);
     }
     
     @GET
