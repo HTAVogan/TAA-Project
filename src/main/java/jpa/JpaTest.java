@@ -48,10 +48,10 @@ public class JpaTest {
 		//		factory.close();
 	}
 	public static void initDAO(EntityManager manager,EntityTransaction tx) {
-		daou = new DAOUser(manager,tx);
-		daomu = new DAOMusic(manager,tx);
-		daolo = new DAOLocation(manager,tx);
-		daoe = new DAOEvents(manager,tx);
+		daou = new DAOUser();
+		daomu = new DAOMusic();
+		daolo = new DAOLocation();
+		daoe = new DAOEvents();
 	}
 	public static void commit() {
 		daou.tx.commit();

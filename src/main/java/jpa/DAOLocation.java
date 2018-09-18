@@ -12,10 +12,8 @@ import jpa.Entites.Ville;
 public class DAOLocation {
 	public  EntityManager manager;
 	public  EntityTransaction tx;
-	public DAOLocation (EntityManager manager,EntityTransaction tx) {
-		this.manager=manager;
-		this.tx=tx;
-		this.tx.begin();
+	public DAOLocation () {
+		manager= EntityManagerHelper.getEntityManager();
 	}
 	public boolean locationAlreadyExist(String name) {
 		String querystring = "SELECT l FROM Location l WHERE l.name = :name";
@@ -29,6 +27,8 @@ public class DAOLocation {
 			System.err.println("A location named '" + name + "' already exists");
 			return null;
 		}else {
+			tx=manager.getTransaction();
+			tx.begin();
 			Location ret = new Location();
 			switch(type) {
 			case 0:
@@ -42,6 +42,7 @@ public class DAOLocation {
 				break;
 			}
 			manager.persist(ret);
+			tx.commit();
 			return ret;
 		}
 	}

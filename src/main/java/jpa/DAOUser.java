@@ -11,10 +11,8 @@ public class DAOUser {
 	public  EntityManager manager;
 	public  EntityTransaction tx;
 
-	public DAOUser (EntityManager manager,EntityTransaction tx) {
-		this.manager=manager;
-		this.tx=tx;
-		this.tx.begin();
+	public DAOUser () {
+		this.manager=EntityManagerHelper.getEntityManager();
 	}
 	
 	public  User getUserById(long id) {
@@ -29,6 +27,9 @@ public class DAOUser {
 		return !query.getResultList().isEmpty();
 	}
 	public User CreateUser(String username, String password) {
+		tx=manager.getTransaction();
+		tx.begin();
+		
 		if(userAlreadyexist(username)) {
 			// Throw user already exist error
 			System.out.println("Error,'"+username+"' already exist");
@@ -36,6 +37,7 @@ public class DAOUser {
 		}else {
 			User newUser = new User(username, password);
 			manager.persist(newUser);
+			tx.commit();
 			return newUser;
 		}
 	}
@@ -53,6 +55,7 @@ public class DAOUser {
 		}
 	}
 	public void addtofav (User u,StyleMusic sm ) {
+		tx = manager.getTransaction();
 		u.getFavoriteStyles().add(sm);
 		manager.refresh(u);
 	}

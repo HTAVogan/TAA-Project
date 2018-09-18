@@ -9,12 +9,16 @@ import jpa.Entites.StyleMusic;
 public class DAOMusic {
 	public  EntityManager manager;
 	public  EntityTransaction tx;
-	public DAOMusic (EntityManager manager,EntityTransaction tx) {
-		this.manager=manager;
-		this.tx=tx;
-		this.tx.begin();
+	
+	public DAOMusic () {
+		this.manager=EntityManagerHelper.getEntityManager();
 	}
+	
 	public StyleMusic addstylemusic(String style) {
+
+		tx=manager.getTransaction();
+		tx.begin();
+		
 		if(musicalreadyexist(style)) {
 			System.out.println("The music style '" + style + "' already exist");
 			return null;
@@ -22,6 +26,7 @@ public class DAOMusic {
 		else {
 			StyleMusic stylem = new StyleMusic (style);
 			manager.persist(stylem);
+			tx.commit();
 			return stylem;
 		}
 	}

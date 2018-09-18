@@ -14,10 +14,8 @@ public class DAOEvents {
 	public EntityManager manager;
 	public EntityTransaction tx;
 
-	public DAOEvents(EntityManager manager, EntityTransaction tx) {
-		this.manager = manager;
-		this.tx = tx;
-		this.tx.begin();
+	public DAOEvents() {
+		this.manager = EntityManagerHelper.getEntityManager();
 	}
 
 	public Events[] getEventsByUser(User user) {
@@ -45,7 +43,7 @@ public class DAOEvents {
 	public Events[] getEventsByUsername(String username) {
 		String querystring = "SELECT e FROM Events e WHERE e.CREATOR_USER_ID = :id";
 		Query query = manager.createQuery(querystring);
-		DAOUser daou = new DAOUser(this.manager, this.tx);
+		DAOUser daou = new DAOUser();
 		User user = daou.getUserByUsername(username);
 		query.setParameter("id", user.getUser_id());
 		Events[] foundEvents = new Events[query.getResultList().size()];
@@ -56,6 +54,10 @@ public class DAOEvents {
 	}
 
 	public Events createEvent(String name, Location l, User u, String url, Date start, Date end) {
+
+		this.tx = EntityManagerHelper.getEntityManager().getTransaction();
+		this.tx.begin();
+
 		if(eventAlreadyExist(name)) {
 			System.out.println("Error title '" + name + "' already exist for this event");
 			return null;
@@ -64,6 +66,7 @@ public class DAOEvents {
 			System.out.println(u.getUser_id() + " creates an Event with url '" + url+ "'");
 			Events e = new Events(name,u,start,end,l,url);
 			manager.persist(e);	
+			this.tx.commit();
 			return e;
 		}
 	}
