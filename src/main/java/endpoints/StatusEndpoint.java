@@ -83,6 +83,28 @@ public class StatusEndpoint {
     */
     
     @POST
+    @Path("/locations/region/create")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public String createRegion(Location l) {
+    	System.out.println(l.getClass().getName());
+    	/*int type;
+    	String classname = 
+    	switch(l.getClass().getName()) {
+    	case "Region":
+    		type = 0;
+    		break;
+    	case "Departement":
+    		type = 1;
+    		break;
+    	default:
+    		type = 2;
+    		break;
+    	}*/
+    	Location newlyCreated = locationDao.CreateLocation(l.getName(), 0);
+    	return "New Region created : name = " + newlyCreated.getName() + " | class = " + newlyCreated.getClass().getName(); 
+    }
+    
+    @POST
     @Path("/user/create")
     @Consumes(MediaType.APPLICATION_JSON)
     public String createUser(User u) {
