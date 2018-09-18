@@ -15,14 +15,19 @@ import com.mysql.jdbc.Blob;
 @Entity
 public class Events {
 	private long id;
+	private String title;
+	private User creator;
+	private String url;
+	private List<Location> locations;
 	private Date date_start;
 	private Date date_end;
-	private List<Location> locations;
+	private byte[] img;
+	
 	//private Departement departement;
 	//private Ville ville;
-	private String title;
-	private byte[] img;
-	private String url;
+	
+	
+	
 	
 	public String getUrl() {
 		return url;
@@ -30,7 +35,7 @@ public class Events {
 	public void setUrl(String url) {
 		this.url = url;
 	}
-	private User creator;
+	
 	@OneToOne
 	public User getCreator() {
 		return creator;
