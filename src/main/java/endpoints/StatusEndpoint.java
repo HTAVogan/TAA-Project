@@ -81,6 +81,13 @@ public class StatusEndpoint {
     }
     */
     
+    @POST
+    @Path("/events/create")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void createEvents(Events e) {
+    	eventsDao.createEvent(e.getTitle(), e.getLocations(), e.getCreator(), e.getUrl(), e.getDate_start(), e.getDate_end());
+    }
+    
     @GET
     @Path("/events/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
@@ -99,6 +106,14 @@ public class StatusEndpoint {
 		}
 		*/
     	
+    }
+    
+    @GET
+    @Path("/events/{title}/{url}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Events createSimpleEvent(@PathParam("title") String title, @PathParam("url") String url) {
+    	System.out.println("Crezation of simple Events before");
+    	return eventsDao.createEvent(title, url);
     }
 
 }

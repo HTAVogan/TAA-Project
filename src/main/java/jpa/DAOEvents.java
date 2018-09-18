@@ -1,6 +1,7 @@
 package jpa;
 
 import java.sql.Date;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
@@ -70,6 +71,39 @@ public class DAOEvents {
 			return e;
 		}
 	}
+	public Events createEvent(String name, List<Location> ls, User u, String url, Date start, Date end) {
+		this.tx = EntityManagerHelper.getEntityManager().getTransaction();
+		this.tx.begin();
+
+		if(eventAlreadyExist(name)) {
+			System.out.println("Error title '" + name + "' already exist for this event");
+			return null;
+		}
+		else {
+			System.out.println(u.getUser_id() + " creates an Event with url '" + url+ "'");
+			Events e = new Events(name,u,start,end,ls,url);
+			manager.persist(e);	
+			this.tx.commit();
+			return e;
+		}
+	}
+	public Events createEvent(String name, String url) {
+		this.tx = EntityManagerHelper.getEntityManager().getTransaction();
+		this.tx.begin();
+
+		if(eventAlreadyExist(name)) {
+			System.out.println("Error title '" + name + "' already exist for this event");
+			return null;
+		}
+		else {
+			System.out.println("creation of simple Event with url '" + url+ "'");
+			Events e = new Events(name,url);
+			manager.persist(e);	
+			this.tx.commit();
+			return e;
+		}
+	}
+	
 	public Events getEventById(long id) {
 		String querystring = "SELECT e FROM Events e WHERE e.id = :id";
 		Query query = manager.createQuery(querystring);

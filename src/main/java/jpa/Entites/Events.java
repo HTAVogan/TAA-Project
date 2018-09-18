@@ -74,6 +74,23 @@ public class Events {
 		this.locations = new ArrayList<Location>();
 		this.locations.add(l);
 	}
+	public Events(String name, User u, Date start, Date end, List<Location> ls, String url) {
+		this.title = name;
+		this.creator = u;
+		this.url = url;
+		this.date_start = start;
+		this.date_end = end;
+		this.locations = ls;
+	}
+	public Events(String name, String url) {
+		this.title = name;
+		this.creator = null;
+		this.url = url;
+		this.date_start = null;
+		this.date_end = null;
+		this.locations = new ArrayList<Location>();
+	}
+	
 	public Events(Date start, Date end) {
 		date_start=start;
 		date_end=end;

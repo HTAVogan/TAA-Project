@@ -42,7 +42,6 @@ public class JpaTest {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		commit();
 		manager.close();
 		EntityManagerHelper.closeEntityManagerFactory();
 		//		factory.close();
@@ -52,11 +51,5 @@ public class JpaTest {
 		daomu = new DAOMusic();
 		daolo = new DAOLocation();
 		daoe = new DAOEvents();
-	}
-	public static void commit() {
-		daou.tx.commit();
-		daomu.tx.commit();
-		daolo.tx.commit();
-		daoe.tx.commit();
 	}
 }
