@@ -11,7 +11,6 @@ import jpa.Entites.Ville;
 
 public class DAOLocation {
 	public  EntityManager manager;
-	public  EntityTransaction tx;
 	public DAOLocation () {
 		manager= EntityManagerHelper.getEntityManager();
 	}
@@ -27,7 +26,7 @@ public class DAOLocation {
 			System.err.println("A location named '" + name + "' already exists");
 			return null;
 		}else {
-			tx=manager.getTransaction();
+			EntityTransaction  tx=manager.getTransaction();
 			tx.begin();
 			Location ret = new Location();
 			switch(type) {

@@ -8,7 +8,6 @@ import jpa.Entites.StyleMusic;
 
 public class DAOMusic {
 	public  EntityManager manager;
-	public  EntityTransaction tx;
 	
 	public DAOMusic () {
 		this.manager=EntityManagerHelper.getEntityManager();
@@ -16,7 +15,7 @@ public class DAOMusic {
 	
 	public StyleMusic addstylemusic(String style) {
 
-		tx=manager.getTransaction();
+		EntityTransaction  tx=manager.getTransaction();
 		tx.begin();
 		
 		if(musicalreadyexist(style)) {

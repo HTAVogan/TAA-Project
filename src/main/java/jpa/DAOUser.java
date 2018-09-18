@@ -9,7 +9,6 @@ import jpa.Entites.User;
 
 public class DAOUser {
 	public  EntityManager manager;
-	public  EntityTransaction tx;
 
 	public DAOUser () {
 		this.manager=EntityManagerHelper.getEntityManager();
@@ -27,7 +26,7 @@ public class DAOUser {
 		return !query.getResultList().isEmpty();
 	}
 	public User CreateUser(String username, String password) {
-		tx=manager.getTransaction();
+		EntityTransaction  tx=manager.getTransaction();
 		tx.begin();
 		
 		if(userAlreadyexist(username)) {
@@ -55,8 +54,9 @@ public class DAOUser {
 		}
 	}
 	public void addtofav (User u,StyleMusic sm ) {
-		tx = manager.getTransaction();
+		EntityTransaction  tx = manager.getTransaction();
 		u.getFavoriteStyles().add(sm);
 		manager.refresh(u);
+		tx.commit();
 	}
 }
