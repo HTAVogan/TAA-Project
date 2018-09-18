@@ -83,10 +83,20 @@ public class StatusEndpoint {
     */
     
     @POST
+    @Path("/user/create")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public String createUser(User u) {
+    	User newlyCreated = userDao.CreateUser(u.getUsername(), u.getPassword());
+    	return "New User created => id : " + newlyCreated.getUser_id() + " | username : " + newlyCreated.getUsername() + " | pass : " + newlyCreated.getPassword();
+    }
+    
+    @POST
     @Path("/events/create")
     @Consumes(MediaType.APPLICATION_JSON)
-    public void createEvents(Events e) {
-    	eventsDao.createEvent(e.getTitle(), e.getLocations(), e.getCreator(), e.getUrl(), e.getDate_start(), e.getDate_end());
+    public String createEvents(Events e) {
+    	Events newlyCreated = eventsDao.createEvent(e.getTitle(), e.getLocations(), e.getCreator(), e.getUrl(), e.getDate_start(), e.getDate_end());
+    	String ret = "New Event Created => id : " + newlyCreated.getId() + " | title : " + newlyCreated.getTitle() + " | url : " + newlyCreated.getUrl();
+    	return ret;
     }
     
     @GET
@@ -133,10 +143,11 @@ public class StatusEndpoint {
     
     @GET
     @Path("/events/{title}/{url}")
-    @Consumes(MediaType.TEXT_PLAIN)
-    public Events createSimpleEvent(@PathParam("title") String title, @PathParam("url") String url) {
-    	System.out.println("Crezation of simple Events before");
-    	return eventsDao.createEvent(title, url);
+    //@Consumes(MediaType.TEXT_PLAIN)
+    public String createSimpleEvent(@PathParam("title") String title, @PathParam("url") String url) {
+    	Events e = eventsDao.createEvent(title, url);
+    	String ret = "New Event Created => id : " + e.getId() + " | title : " + e.getTitle() + " | url : " + e.getUrl();
+    	return ret;
     }
 
 }
